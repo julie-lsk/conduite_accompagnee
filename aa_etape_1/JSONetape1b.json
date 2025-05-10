@@ -1,0 +1,8 @@
+[
+  {"idMeteo": 1, "nomMeteo":"Ensoleillée"}, 
+  {"idMeteo": 2, "nomMeteo":"Pluie"}, 
+  {"idMeteo": 3, "nomMeteo":"Brouillard"}, 
+  {"idMeteo": 4, "nomMeteo":"Neige"}, 
+  {"idMeteo": 5, "nomMeteo":"Venteux"}, 
+  {"idMeteo": 6, "nomMeteo":"Orage"}
+]

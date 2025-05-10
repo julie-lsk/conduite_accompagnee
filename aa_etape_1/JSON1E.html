@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etape 1e - Commun</title>
+    <script>
+      let expConduite = [{"idExpConduite":"1","date":"2024-10-22","heureDebut":"12:00","heureFin":"13:00","km":15,"idMeteo":1,"idTrafic":1,"idEnvironnement":[3,4],"idManoeuvre":[1,3],"idTypeRoute":[1,2,3],"idEvenement":[]},{"idExpConduite":"2","date":"2024-10-23","heureDebut":"15:00","heureFin":"16:00","km":40,"idMeteo":4,"idTrafic":2,"idEnvironnement":[1,4],"idManoeuvre":[1,2],"idTypeRoute":[3],"idEvenement":[1]},{"idExpConduite":"3","date":"2024-10-25","heureDebut":"14:00","heureFin":"14:30","km":150,"idMeteo":2,"idTrafic":3,"idEnvironnement":[1,3,4],"idManoeuvre":[2,3],"idTypeRoute":[1,3],"idEvenement":[2,3]}]
+
+      let meteo =[{"idMeteo":1,"nomMeteo":"Ensoleillée"},{"idMeteo":2,"nomMeteo":"Pluie"},{"idMeteo":3,"nomMeteo":"Brouillard"},{"idMeteo":4,"nomMeteo":"Neige"},{"idMeteo":5,"nomMeteo":"Vent"},{"idMeteo":6,"nomMeteo":"Orage"},{"idMeteo":7,"nomMeteo":"Nuageux"},{"idMeteo":8,"nomMeteo":"Canicule"},{"idMeteo":9,"nomMeteo":"Grêle"},{"idMeteo":10,"nomMeteo":"Averses"},{"idMeteo":11,"nomMeteo":"Tempête"},{"idMeteo":12,"nomMeteo":"Gel"}]
+      let trafic = [{"traficId":1,"typeTrafic":"Faible"},{"traficId":2,"typeTrafic":"Modéré"},{"traficId":3,"typeTrafic":"Fort"},{"traficId":4,"typeTrafic":"Fluctuant"}]
+      let environnement = [{"idEnvironnement":1,"environnement":"Citadin"},{"idEnvironnement":2,"environnement":"Rural"},{"idEnvironnement":3,"environnement":"Autoroutier"},{"idEnvironnement":4,"environnement":"Montagnard"}]
+      let manoeuvre = [{"manoeuvreId":1,"manoeuvreNom":"Stationnement en épi"},{"manoeuvreId":2,"manoeuvreNom":"Stationnement en bataille"},{"manoeuvreId":3,"manoeuvreNom":"Stationnement en créneau"}]
+      let typeRoute = [{"typeRouteId":1,"typeRouteNom":"Nationale"},{"typeRouteId":2,"typeRouteNom":"Départementale"},{"typeRouteId":3,"typeRouteNom":"Autoroute"},{"typeRouteId":4,"typeRouteNom":"Centre-ville"},{"typeRouteId":5,"typeRouteNom":"Mixte"}]
+      let transport = [{"idEveTransport":1,"nomEveTransport":"Traffic important"},{"idEveTransport":2,"nomEveTransport":"Accident de la route"},{"idEveTransport":3,"nomEveTransport":"Travaux routiers"},{"idEveTransport":4,"nomEveTransport":"Embouteillage"},{"idEveTransport":5,"nomEveTransport":"Obstacle sur la route"},{"idEveTransport":6,"nomEveTransport":"Routes fermées"}]
+ 
+
+      console.log(expConduite);
+      console.log(meteo);
+      console.log(trafic);
+      console.log(environnement);
+      console.log(manoeuvre);
+      console.log(typeRoute);
+      console.log(transport);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

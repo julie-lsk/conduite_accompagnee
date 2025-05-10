@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface conduite accompagnée</title>
+
+    <style>
+        body {
+            background-image: url("images/fond.png");                 
+            color: var(--white-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+            min-height: 100vh; 
+            margin: auto;   
+            width: 100%; 
+        }
+
+        :root {
+            --primary-color: #17212b;
+            --white-color: #f0f8ff;
+            --secondary-color: #e67e22;
+            --secondary-hover-color: #d9761f;
+            --highlight-color: #3ca4ff;
+            --highlight-transparent-color: rgba(60, 164, 255, 0.5);
+            --ok-color: #1abc9c;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;  
+        }
+
+        header, footer {
+            width: 100%;
+            background-color: var(--secondary-color);
+            padding: 4px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        footer {            
+            display: inline-block;           
+            font-size: 0.8rem;
+            clear: both;
+            position: absolute;
+            bottom: 0;
+        }
+
+        form {
+            display: block;           
+            margin: 10vh auto;
+            width: 40vw;
+            min-width: 600px;   
+            padding: 5px;
+            background-color: var(--primary-color);
+            border-radius: 15px;            
+        }
+
+        fieldset {
+            padding: 5px;
+            margin: 20px;  
+            border: dotted 1.5px var(--white-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 30px;
+            align-items: center;  
+        }
+
+        div.gauche {
+            grid-column: 1 / 3;
+        }
+
+        div.droite {
+            grid-column: 4 / 6;
+        }
+
+        input, select {
+            background-color: var(--white-color);
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+            border: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--white-color);
+        }
+
+        #submitForm {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            margin-top: 15px;            
+            width: 100%;
+            font-weight: bold;
+            border: none;
+            height: 30px;     
+            padding: 5px;   
+            cursor: pointer;  
+            color: var(--primary-color);
+            grid-column: 2 / 5;  
+        }
+
+        /* Media queries */
+        @media screen and (max-width: 767px) {
+            form {   
+                margin: auto;
+                margin-top: 50px;  
+                margin-bottom: 50px;
+                width: 100%;
+                min-width: 200px;  
+            }
+            div.gauche, div.droite {
+                grid-column: 1 / 6;
+            }
+            footer {
+                position: relative;
+            }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            form {   
+                margin: 10px auto; 
+                width: 80%;                              
+            }
+            footer {
+                position: absolute;
+                bottom: 0;
+            }
+        }                   
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Interface conduite accompagnée</h1>
+    </header>
+    
+    <form id="form">
+        <fieldset>
+            <div class="gauche">
+                <label for="date">Date de la session :</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="droite">
+                <label for="heureDebut">Heure de départ :</label>
+                <input type="time" id="heureDebut" name="heureDebut" required>
+            </div>
+            <div class="gauche">
+                <label for="heureFin">Heure d'arrivée :</label>
+                <input type="time" id="heureFin" name="heureFin" required>
+            </div>
+            <div class="droite">
+                <label for="km">Kilométrage parcouru :</label>
+                <input type="number" id="km" name="km" placeholder="20" required>
+            </div>
+            <div class="gauche">
+                <label for="meteo">Conditions météo :</label>
+                <select id="meteo" name="meteo" required >
+                    <option value="" disabled selected hidden>Meteo</option>
+                    <option value="1">Ensoleillée</option>
+                    <option value="2">Pluie</option>
+                    <option value="3">Brouillard</option>
+                    <option value="4">Neige</option>
+                    <option value="5">Vent</option>
+                    <option value="6">Orage</option>
+                    <option value="7">Nuageux</option>
+                    <option value="8">Canicule</option>
+                    <option value="9">Grêle</option>
+                    <option value="10">Averses</option>
+                    <option value="11">Tempête</option>
+                    <option value="12">Gel</option>
+                </select>
+            </div>
+            <div class="droite">
+                <label for="trafic">Trafic routier :</label>
+                <select id="trafic" name="trafic" required>
+                    <option value="" disabled selected hidden>Trafic</option>
+                    <option value="1">Faible</option>
+                    <option value="2">Modéré</option>
+                    <option value="3">Fort</option>
+                    <option value="4">Fluctuant</option>
+                </select>
+            </div>
+            <div class="gauche">
+                <label for="environnement">Environnement de conduite :</label>
+                <select id="environnement" name="environnement" required >
+                    <option value="" disabled selected hidden>Environnement</option>
+                    <option value="1">Citadin</option>
+                    <option value="2">Rural</option>
+                    <option value="3">Autoroutier</option>
+                    <option value="4">Montagnard</option>
+                </select>
+            </div>
+            <div class="droite">
+                <label for="manoeuvre">Type de manœuvre :</label>
+                <select id="manoeuvre" name="manoeuvre" required>
+                    <option value="" disabled selected hidden>Manoeuvre</option>
+                    <option value="1">Stationnement en épi</option>
+                    <option value="2">Stationnement en bataille</option>
+                    <option value="3">Stationnement en créneau</option>
+                </select>
+            </div>
+            <div class="gauche">
+                <label for="typeRoute">Type de route :</label>
+                <select id="typeRoute" name="typeRoute" required>
+                    <option value="" disabled selected hidden>Type de route</option>
+                    <option value="1">Nationale</option>
+                    <option value="2">Départementale</option>
+                    <option value="3">Autoroute</option>
+                    <option value="4">Centre-ville</option>
+                    <option value="5">Mixte</option>
+                </select>
+            </div>
+            <div class="droite">
+                <label for="transport">Événement routier :</label>
+                <select id="transport" name="transport" required>
+                    <option value="" disabled selected hidden>Transport</option>
+                    <option value="1">Trafic important</option>
+                    <option value="2">Accident de la route</option>
+                    <option value="3">Travaux routiers</option>
+                    <option value="4">Embouteillage</option>
+                    <option value="5">Obstacle sur la route</option>
+                    <option value="6">Routes fermées</option>
+                </select>
+            </div>
+            <button type="submit" id="submitForm">Enregistrer</button>
+        </fieldset>
+    </form>
+
+    <footer>
+        <p>Réalisation : Equipe 3</p>
+        <p>Copyright &copy; 2024</p>
+        <p> </p>
+    </footer>  
+</body>
+</html>

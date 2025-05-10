@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface conduite accompagnée</title>
+    
+    <style>
+        body {
+            background-image: url("images/fond.png");                 
+            color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+            min-height: 100vh; 
+            margin: 0;
+            width: 100%; 
+        }
+
+        /* Définitions de couleurs pour l'interface */
+        :root {
+            --primary-color: #17212b;
+            --white-color: #f0f8ff;
+            --secondary-color: #e67e22;
+            --secondary-hover-color: #d9761f;
+            --highlight-color: #3ca4ff;
+            --highlight-transparent-color: rgba(60, 164, 255, 0.5);
+            --ok-color: #1abc9c;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;  
+        }
+
+        header, footer {
+            width: 100%;
+            background-color: var(--secondary-color);
+            padding: 1em;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        footer {            
+            font-size: 0.8rem;
+            clear: both;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Style du formulaire avec adaptation pour mobile */
+        form {
+            display: block;           
+            margin: 10vh auto;
+            width: 40vw;
+            min-width: 300px;   
+            padding: 1em;
+            background-color: var(--primary-color);
+            border-radius: 15px;            
+        }
+
+        fieldset {
+            padding: 1em;
+            border: 1.5px dotted var(--white-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 1.5em;
+            align-items: center;  
+        }
+
+        .gauche {
+            grid-column: 1 / 3;
+        }
+
+        .droite {
+            grid-column: 4 / 6;
+        }
+
+        input, select {
+            background-color: var(--white-color);
+            width: 100%;
+            border-radius: 5px;
+            padding: 0.5em;
+            border: none;
+            cursor: pointer;
+        }
+
+        input:valid, select:valid{
+            border:solid 3px green;
+            
+        }
+
+        input:invalid, select:invalid {
+            border: 2px solid rgb(255, 162, 0);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: var(--white-color);
+        }
+
+        select[multiple]{
+            min-height:110px;
+        }
+
+        #submitForm {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            margin-top: 1em;            
+            width: 100%;
+            font-weight: bold;
+            border: none;
+            height: 2.5em;     
+            padding: 0.5em;   
+            cursor: pointer;  
+            color: var(--primary-color);
+            grid-column: 2 / 5;  
+        }
+     
+
+        /* Style pour le conteneur de réinitialisation */
+        #reset-container {
+            position: fixed;
+            bottom: 15em;
+            right: 1em;
+            background-color: var(--primary-color);
+            padding: 0.5em;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #resetCode, #resetButton {
+            margin-top: 0.5em;
+            display: block;
+            width: 100%;
+            padding: 0.3em;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #resetCode {
+            background-color: var(--white-color);
+        }
+
+        #resetButton {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Style pour la page de bilan */
+        #bilanPage {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 1em;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 2em auto;
+            text-align: center;
+        }
+
+        .footer-buttons {
+            margin-top: 1em;
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        .footer-buttons button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Amélioration de l'affichage des statistiques */
+        .stat-table {
+            width: 100%;
+            margin-top: 1em;
+            color: var(--highlight-color);
+        }
+
+        .stat-table th, .stat-table td {
+            padding: 0.5em;
+            border-bottom: 1px solid var(--white-color);
+        }
+
+        .stat-table th {
+            text-align: left;
+        }
+        
+
+        /* Media queries pour l'adaptation mobile */
+        @media screen and (max-width: 767px) {
+            form {   
+                margin: 2em auto;
+                width: 90%;
+            }
+            .gauche, .droite {
+                grid-column: 1 / 6;
+            }
+            #reset-container{
+                position: relative;
+                max-width: 70%;
+                margin:auto;
+                bottom:0;
+                margin-bottom: 30px;
+            }
+            footer {
+                position: relative;
+            }
+
+            .footer-buttons {
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-buttons buttons{
+                grid-column: 1;
+            }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            form {   
+                margin: 2em auto; 
+                width: 80%;                              
+            }
+            footer {
+                position: relative;
+                bottom: 0;
+            }
+
+            #reset-container{
+                position: relative;
+                max-width: 50%;
+                margin:auto;
+                bottom:0;
+                margin-bottom: 30px;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Interface conduite accompagnée</h1>
+        <div class="footer-buttons">
+            <button class="viewBilanButton">Voir le bilan</button>
+            <button class="downloadJsonButton">Télécharger JSON</button>
+            <button class="downloadCsvButton">Télécharger CSV</button>
+        </div>
+    </header>
+    
+    <main>
+        <form id="form">
+            <fieldset>
+                <legend>Informations de la session de conduite</legend>
+                <div class="gauche">
+                    <label for="date">Date de la session :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="droite">
+                    <label for="heureDebut">Heure de départ :</label>
+                    <input type="time" id="heureDebut" name="heureDebut" required>
+                </div>
+                <div class="gauche">
+                    <label for="heureFin">Heure d'arrivée :</label>
+                    <input type="time" id="heureFin" name="heureFin" required>
+                </div>
+                <div class="droite">
+                    <label for="km">Kilométrage parcouru :</label>
+                    <input type="number" id="km" name="km" placeholder="20" required min="0">
+                </div>
+                <div class="gauche">
+                    <label for="meteo">Conditions météo :</label>
+                    <select id="meteo" name="meteo" required></select>
+                </div>
+                <div class="droite">
+                    <label for="trafic">Trafic routier :</label>
+                    <select id="trafic" name="trafic" required></select>   
+                </div>
+                <div class="gauche">
+                    <label for="environnement">Environnement de conduite :</label>
+                    <select id="environnement" name="environnement" required multiple></select>
+                </div>
+                <div class="droite">
+                    <label for="manoeuvre">Type de manœuvre :</label>
+                    <select id="manoeuvre" name="manoeuvre" multiple></select>
+                </div>
+                <div class="gauche">
+                    <label for="typeRoute">Type de route :</label>
+                    <select id="typeRoute" name="typeRoute" required multiple></select>
+                </div>
+                <div class="droite">
+                    <label for="transport">Événement routier :</label>
+                    <select id="transport" name="transport" multiple></select>
+                </div>
+                <button type="submit" id="submitForm">Enregistrer</button>
+            </fieldset>
+        </form>
+        
+        <!-- Conteneur pour le code de réinitialisation et le bouton -->
+        <div id="reset-container">
+            <label for="resetCode">Code de réinitialisation :</label>
+            <input type="text" id="resetCode" placeholder="Entrez le code" maxlength="10">
+            <button id="resetButton">Rafraîchir</button>
+        </div>
+
+        <!-- Page de bilan -->
+        <div id="bilanPage" style="display:none">
+            <h2>Bilan des Expériences de Conduite</h2>
+            <div>
+                <label for="filterDate">Filtrer par date :</label>
+                <input type="date" id="filterDate">
+                
+                <label for="filterCondition">Filtrer par condition météo :</label>
+                <select id="filterCondition">
+                    <option value="">-- Toutes --</option>
+                    <option value="1">Ensoleillée</option>
+                    <option value="2">Pluie</option>
+                    <option value="3">Brouillard</option>
+                    <option value="4">Neige</option>
+                    <option value="5">Vent</option>
+                    <option value="6">Orage</option>
+                    <option value="7">Nuageux</option>
+                    <option value="8">Canicule</option>
+                    <option value="9">Grêle</option>
+                    <option value="10">Averses</option>
+                    <option value="11">Tempête</option>
+                    <option value="12">Gel</option>
+                </select>
+                
+                <button id="applyFiltersButton">Appliquer les filtres</button>
+            </div>
+            <div id="statistics">
+                <p id="totalExperiences">Nombre total d'expériences : 0</p>
+                <p id="averageKilometers">Moyenne des kilomètres parcourus : 0 km</p>
+                <table class="stat-table">
+                    <tr><th>Condition Météo</th><th>Nombre d'expériences</th></tr>
+                    <tbody id="experiencesByCondition"></tbody>
+                </table>
+                <table class="stat-table">
+                    <tr><th>Type de Route</th><th>Nombre d'expériences</th></tr>
+                    <tbody id="experiencesByRouteType"></tbody>
+                </table>
+                <table class="stat-table">
+                    <tr><th>Type de Manœuvre</th><th>Nombre d'expériences</th></tr>
+                    <tbody id="experiencesByManoeuvre"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Réalisation : Equipe 3</p>
+        <p id="bilanDistance">Distance totale parcourue : 0 km</p>
+        <div class="footer-buttons">
+            <button class="viewBilanButton">Voir le bilan</button>
+            <button class="downloadJsonButton">Télécharger JSON</button>
+            <button class="downloadCsvButton">Télécharger CSV</button>
+        </div>
+        <p>&copy; 2024</p>
+    </footer>  
+
+    <script>
+        // Données JSON pour remplir dynamiquement les listes déroulantes du formulaire
+        const donneesConduite = {
+            meteo: [
+                { id: 1, label: "Ensoleillée" },
+                { id: 2, label: "Pluie" },
+                { id: 3, label: "Brouillard" },
+                { id: 4, label: "Neige" },
+                { id: 5, label: "Vent" },
+                { id: 6, label: "Orage" },
+                { id: 7, label: "Nuageux" },
+                { id: 8, label: "Canicule" },
+                { id: 9, label: "Grêle" },
+                { id: 10, label: "Averses" },
+                { id: 11, label: "Tempête" },
+                { id: 12, label: "Gel" }
+            ],
+            // Autres listes pour les variables de trafic, environnement, etc.
+            trafic: [
+                { id: 1, label: "Faible" },
+                { id: 2, label: "Modéré" },
+                { id: 3, label: "Fort" },
+                { id: 4, label: "Fluctuant" }
+            ],
+            environnement: [
+                { id: 1, label: "Citadin" },
+                { id: 2, label: "Rural" },
+                { id: 3, label: "Autoroutier" },
+                { id: 4, label: "Montagnard" }
+            ],
+            manoeuvre: [
+                { id: 1, label: "Stationnement en épi" },
+                { id: 2, label: "Stationnement en bataille" },
+                { id: 3, label: "Stationnement en créneau" }
+            ],
+            typeRoute: [
+                { id: 1, label: "Nationale" },
+                { id: 2, label: "Départementale" },
+                { id: 3, label: "Autoroute" },
+                { id: 4, label: "Centre-ville" },
+                { id: 5, label: "Mixte" }
+            ],
+            transport: [
+                { id: 1, label: "Trafic important" },
+                { id: 2, label: "Accident de la route" },
+                { id: 3, label: "Travaux routiers" },
+                { id: 4, label: "Embouteillage" },
+                { id: 5, label: "Obstacle sur la route" },
+                { id: 6, label: "Routes fermées" }
+            ]
+        };
+
+        // Fonction pour générer les options de liste déroulante en utilisant les données JSON
+        function generateOptions(selectId, options, placeholder) {
+            const selectElement = document.getElementById(selectId);
+            selectElement.innerHTML = "";  // Vide le contenu existant
+
+            selectElement.insertAdjacentHTML('beforeend', `<option value="" disabled selected hidden>${placeholder}</option>`);
+            // Ajoute chaque option à la liste déroulante
+            options.forEach(option => {
+                selectElement.insertAdjacentHTML('beforeend', `<option value="${option.id}">${option.label}</option>`);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Génère les options pour chaque liste déroulante du formulaire
+            generateOptions('meteo', donneesConduite.meteo, "Choisissez la météo");
+            generateOptions('trafic', donneesConduite.trafic, "Choisissez le trafic");
+            generateOptions('environnement', donneesConduite.environnement, "Choisissez l'environnement");
+            generateOptions('manoeuvre', donneesConduite.manoeuvre, "Choisissez la manoeuvre");
+            generateOptions('typeRoute', donneesConduite.typeRoute, "Choisissez le type de route");
+            generateOptions('transport', donneesConduite.transport, "Choisissez l'événement");
+            calculerDistanceTotale();  // Met à jour la distance totale dès le chargement
+
+
+            //Ici ça permet de sélectionner plusieurs réponses
+            //en gros on va prendre le nom du select, enlever le fonctionnement par défaut et 
+            //regarder s'il est sélectionné ou non et inverser cette info(en gros, on clique sur un sélectionné, ça le déselectionner, on clique un déselectionné ça le sélectionner)
+            function selectMultiple(selectName){ 
+                var select = document.getElementById(selectName); 
+                select.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                var select = this;
+                var index = Array.from(select.options).indexOf(e.target);
+                if (e.target.tagName.toLowerCase() !== 'option' || index === -1) return;
+                select.options[index].selected = !select.options[index].selected;
+                return false;
+                }
+                );
+            }
+            
+            //on lance la fonction de sélection multiple
+            selectMultiple('environnement');
+            selectMultiple('manoeuvre');
+            selectMultiple('typeRoute');
+            selectMultiple('transport');
+
+            // Gestionnaire de soumission de formulaire
+            const formElement = document.getElementById("form");
+            formElement.addEventListener("submit", function(event) {
+                event.preventDefault();  // Empêche le rechargement de la page lors de l'enregistrement
+
+                // Récupère les valeurs des champs du formulaire
+                const experience = {
+                    date: document.getElementById("date").value,
+                    heureDebut: document.getElementById("heureDebut").value,
+                    heureFin: document.getElementById("heureFin").value,
+                    km: parseFloat(document.getElementById("km").value),
+                    meteo: document.getElementById("meteo").value,
+                    trafic: document.getElementById("trafic").value,
+                    environnement: getValidSelectedOptions("environnement"),
+                    manoeuvre: getValidSelectedOptions("manoeuvre"),
+                    typeRoute: getValidSelectedOptions("typeRoute"),
+                    transport: getValidSelectedOptions("transport")
+                };
+
+                // Fonction pour récupérer les options valides, en excluant "0" si c'est la seule option sélectionnée
+                function getValidSelectedOptions(selectId) {
+                    const selectedOptions = Array.from(document.getElementById(selectId).selectedOptions);
+    
+                    // Extrait les valeurs des options sélectionnées
+                    const values = selectedOptions.map(option => option.value);
+
+                    // Vérifie si toutes les options sélectionnées sont invalides (valeurs vides ou nulles)
+                    // Si aucune option n'est sélectionnée, retourne [0]
+                    if (values.length === 0 || values.every(value => value === "" || value === null)) {
+                        return [0];  // Retourne 0 si aucune option valide n'est sélectionnée
+                    }
+
+                    // Filtre les valeurs invalides ("" et null), on garde les autres
+                    const validValues = values.filter(value => value !== "" && value !== null);
+
+                    // Si seulement "0" est sélectionné, on l'ignore
+                    if (validValues.length === 1 && validValues[0] === "0") {
+                        return []; // Ignore "0" si c'est le seul sélectionné
+                    }
+
+                    return validValues;
+                }
+
+                // Récupère les expériences stockées dans le localStorage, ou crée un tableau vide
+                let experiences = JSON.parse(localStorage.getItem("experiences")) || [];
+                experience.id = experiences.length > 0 ? experiences[experiences.length - 1].id + 1 : 1;  // Incrémente l'ID
+                experiences.push(experience);  // Ajoute la nouvelle expérience
+                localStorage.setItem("experiences", JSON.stringify(experiences));  // Sauvegarde dans le localStorage
+
+                alert("Expérience de conduite enregistrée !");
+                formElement.reset();  // Réinitialise le formulaire après soumission
+                calculerDistanceTotale();  // Met à jour la distance totale
+            });
+        });
+        
+
+        // Calcul de la distance totale parcourue
+        function calculerDistanceTotale() {
+            const experiences = JSON.parse(localStorage.getItem("experiences")) || [];
+            const distanceTotale = experiences.reduce((acc, experience) => acc + experience.km, 0);
+            document.getElementById("bilanDistance").innerText = `Distance totale parcourue : ${distanceTotale} km`;
+        }
+
+        // Bouton de réinitialisation des données
+        document.getElementById("resetButton").addEventListener("click", function () {
+            const codeInput = document.getElementById("resetCode").value.trim();
+            const correctCode = "CAT";  
+
+            // Vérification du code de réinitialisation
+            if (codeInput === correctCode) {
+                localStorage.removeItem("experiences");
+                calculerDistanceTotale();  // Mise à jour après suppression des données
+                alert("La distance totale a été remise à zéro.");
+                document.getElementById("resetCode").value = "";
+            } else {
+                alert("Erreur. Impossible de réinitialiser.");
+            }
+        });
+
+        // Affichage ou masquage de la page de bilan
+        let viewBilanButtons = document.querySelectorAll(".viewBilanButton")
+        viewBilanButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const bilanPage = document.getElementById("bilanPage");
+                bilanPage.style.display = bilanPage.style.display === "none" ? "block" : "none";
+                
+                if (bilanPage.style.display === "block") {
+                    updateBilan();
+                }
+            });
+        });
+
+        // Application des filtres sur les expériences
+        document.getElementById("applyFiltersButton").addEventListener("click", function () {
+            updateBilan();
+        });
+
+        // Met à jour la page de bilan avec les statistiques
+        function updateBilan() {
+            const experiences = JSON.parse(localStorage.getItem("experiences")) || [];
+            const filterDate = document.getElementById("filterDate").value;
+            const filterCondition = document.getElementById("filterCondition").value;
+
+            // Filtre les expériences en fonction des critères choisis
+            let filteredExperiences = experiences;
+            if (filterDate) {
+                filteredExperiences = filteredExperiences.filter(exp => exp.date === filterDate);
+            }
+            if (filterCondition) {
+                filteredExperiences = filteredExperiences.filter(exp => exp.meteo === filterCondition);
+            }
+
+            // Calcul des statistiques sur les expériences filtrées
+            const totalExperiences = filteredExperiences.length;
+            const totalKilometers = filteredExperiences.reduce((acc, exp) => acc + exp.km, 0);
+            const averageKilometers = totalExperiences > 0 ? (totalKilometers / totalExperiences).toFixed(2) : 0;
+
+            // Comptabilise les expériences par type en tenant compte des tableaux
+            const experiencesByCondition = {};
+            const experiencesByRouteType = {};
+            const experiencesByManoeuvre = {};
+            const experiencesByTransport = {};
+
+            filteredExperiences.forEach(exp => {
+                // Comptabiliser les conditions météo
+                experiencesByCondition[exp.meteo] = (experiencesByCondition[exp.meteo] || 0) + 1;
+
+                // Comptabiliser les types de route (gestion de multiples options)
+                if (Array.isArray(exp.typeRoute)) {
+                    exp.typeRoute.forEach(route => {
+                        experiencesByRouteType[route] = (experiencesByRouteType[route] || 0) + 1;
+                    });
+                } else {
+                    experiencesByRouteType[exp.typeRoute] = (experiencesByRouteType[exp.typeRoute] || 0) + 1;
+                }
+
+                // Comptabiliser les manœuvres (gestion de multiples options)
+                if (Array.isArray(exp.manoeuvre)) {
+                    exp.manoeuvre.forEach(manoeuvre => {
+                        experiencesByManoeuvre[manoeuvre] = (experiencesByManoeuvre[manoeuvre] || 0) + 1;
+                    });
+                } else {
+                    experiencesByManoeuvre[exp.manoeuvre] = (experiencesByManoeuvre[exp.manoeuvre] || 0) + 1;
+                }
+
+                // Comptabiliser les événements de transport (gestion de multiples options)
+                if (Array.isArray(exp.transport)) {
+                    exp.transport.forEach(transport => {
+                        experiencesByTransport[transport] = (experiencesByTransport[transport] || 0) + 1;
+                    });
+                } else {
+                    experiencesByTransport[exp.transport] = (experiencesByTransport[exp.transport] || 0) + 1;
+                }
+            });
+
+            document.getElementById("totalExperiences").innerText = `Nombre total d'expériences : ${totalExperiences}`;
+            document.getElementById("averageKilometers").innerText = `Moyenne des kilomètres parcourus : ${averageKilometers} km`;
+
+            // Affiche les données sous forme de tableau pour chaque catégorie
+            displayStatTable("experiencesByCondition", experiencesByCondition);
+            displayStatTable("experiencesByRouteType", experiencesByRouteType);
+            displayStatTable("experiencesByManoeuvre", experiencesByManoeuvre);
+        }
+
+        // Affiche un objet de données statistiques dans un tableau
+        function displayStatTable(tableId, data) {
+            const tbody = document.getElementById(tableId);
+            tbody.innerHTML = "";
+            Object.entries(data).forEach(([key, value]) => {
+                const row = `<tr><td>${key}</td><td>${value}</td></tr>`;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+
+        // Fonction pour télécharger les données en JSON ou CSV
+        function downloadData(format) {
+            const experiences = JSON.parse(localStorage.getItem("experiences")) || [];
+            let dataStr = "";
+
+            if (format === "json") {
+                dataStr = JSON.stringify(experiences, null, 2);
+                const blob = new Blob([dataStr], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "experiences.json";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else if (format === "csv") {
+                dataStr = "ID,Date,Heure Début,Heure Fin,Kilométrage,Météo,Trafic,Environnement,Manœuvre,Type de Route,Transport\n";
+                experiences.forEach(exp => {
+                    dataStr += `${exp.id},${exp.date},${exp.heureDebut},${exp.heureFin},${exp.km},${exp.meteo},${exp.trafic},${exp.environnement},${exp.manoeuvre},${exp.typeRoute},${exp.transport}\n`;
+                });
+                const blob = new Blob([dataStr], { type: "text/csv" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "experiences.csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        // Boutons pour télécharger en JSON ou CSV
+        let downloadJsonButton = document.querySelectorAll(".downloadJsonButton")
+        downloadJsonButton.forEach(button =>{
+            button.addEventListener("click", () => downloadData("json"));
+        })
+        
+        let downloadCsvButton = document.querySelectorAll(".downloadCsvButton")
+        downloadCsvButton.forEach(button =>{
+            button.addEventListener("click", () => downloadData("csv"));
+        })
+        
+        
+    </script>
+</body>
+</html>

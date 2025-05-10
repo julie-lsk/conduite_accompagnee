@@ -1,0 +1,244 @@
+body {
+    background-image: url("images/fond.png");                 
+    color: #f0f8ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+    min-height: 100vh; 
+    margin: 0;
+    width: 100%; 
+}
+
+/* Définitions de couleurs pour l'interface */
+:root {
+    --primary-color: #17212b;
+    --white-color: #f0f8ff;
+    --secondary-color: #e67e22;
+    --secondary-hover-color: #d9761f;
+    --highlight-color: #3ca4ff;
+    --highlight-transparent-color: rgba(60, 164, 255, 0.5);
+    --ok-color: #1abc9c;
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+header, footer {
+    width: 100%;
+    background-color: var(--secondary-color);
+    padding: 1em;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+footer {            
+    font-size: 0.8rem;
+    clear: both;
+    position: relative;
+    width: 100%;
+}
+
+/* Style du formulaire avec adaptation pour mobile */
+form {
+    display: block;           
+    margin: 10vh auto;
+    width: 40vw;
+    min-width: 300px;   
+    padding: 1em;
+    background-color: var(--primary-color);
+    border-radius: 15px;            
+}
+
+fieldset {
+    padding: 1em;
+    border: 1.5px dotted var(--white-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1.5em;
+    align-items: center;  
+}
+
+.gauche {
+    grid-column: 1 / 3;
+}
+
+.droite {
+    grid-column: 4 / 6;
+}
+
+input, select {
+    background-color: var(--white-color);
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.5em;
+    border: none;
+    cursor: pointer;
+}
+
+input:valid, select:valid{
+    border:solid 3px green;
+    
+}
+
+input:invalid, select:invalid {
+    border: 2px solid rgb(255, 162, 0);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: var(--white-color);
+}
+
+select[multiple]{
+    min-height:110px;
+}
+
+#submitForm {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    margin-top: 1em;            
+    width: 100%;
+    font-weight: bold;
+    border: none;
+    height: 2.5em;     
+    padding: 0.5em;   
+    cursor: pointer;  
+    color: var(--primary-color);
+    grid-column: 2 / 5;  
+}
+
+
+/* Style pour le conteneur de réinitialisation */
+#reset-container {
+    position: fixed;
+    bottom: 15em;
+    right: 1em;
+    background-color: var(--primary-color);
+    padding: 0.5em;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+#resetCode, #resetButton {
+    margin-top: 0.5em;
+    display: block;
+    width: 100%;
+    padding: 0.3em;
+    border: none;
+    border-radius: 5px;
+}
+
+#resetCode {
+    background-color: var(--white-color);
+}
+
+#resetButton {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Style pour la page de bilan */
+#bilanPage {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 1em;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 2em auto;
+    text-align: center;
+}
+
+.footer-buttons {
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}
+
+.footer-buttons button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Amélioration de l'affichage des statistiques */
+.stat-table {
+    width: 100%;
+    margin-top: 1em;
+    color: var(--highlight-color);
+}
+
+.stat-table th, .stat-table td {
+    padding: 0.5em;
+    border-bottom: 1px solid var(--white-color);
+}
+
+.stat-table th {
+    text-align: left;
+}
+
+
+/* Media queries pour l'adaptation mobile */
+@media screen and (max-width: 767px) {
+    form {   
+        margin: 2em auto;
+        width: 90%;
+    }
+    .gauche, .droite {
+        grid-column: 1 / 6;
+    }
+    #reset-container{
+        position: relative;
+        max-width: 70%;
+        margin:auto;
+        bottom:0;
+        margin-bottom: 30px;
+    }
+    footer {
+        position: relative;
+    }
+
+    .footer-buttons {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-buttons buttons{
+        grid-column: 1;
+    }
+    .hidden{
+        display:none;
+    }
+    
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    form {   
+        margin: 2em auto; 
+        width: 80%;                              
+    }
+    footer {
+        position: relative;
+        bottom: 0;
+    }
+
+    #reset-container{
+        position: relative;
+        max-width: 50%;
+        margin:auto;
+        bottom:0;
+        margin-bottom: 30px;
+    }
+
+    
+}
