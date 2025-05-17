@@ -1,6 +1,6 @@
 <?php
 
-$config = require__DIR__ . '/env.php';
+$config = require __DIR__ . '/.env.php';
 
 $host = $config['DB_HOST'];
 $bddname = $config['DB_NAME'];
