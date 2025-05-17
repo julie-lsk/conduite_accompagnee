@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,9 +6,14 @@
     <title>Interface conduite accompagnée</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- <script src="/index.js"></script> -->
+
+    <?php 
+        require __DIR__ . '/data.php'; 
+    ?>
+
 </head>
 
 <body>
@@ -23,48 +27,77 @@
     </header>
     
     <main>
+
+        <?php 
+            $champsExpConduite = getExpConduite(); 
+            $champsManoeuvres= getTypeManoeuvre(); 
+            $champsMeteo = getMeteo(); 
+            $champsRoute = getTypeRoute(); 
+            $champsTrafic = getTypeTrafic(); 
+        ?>
+
+        <!-- <pre>
+            <?php var_dump($champsMeteo); ?>
+        </pre> -->
+
         <form id="form">
             <fieldset>
                 <legend>Informations de la session de conduite</legend>
                 <div class="gauche">
-                    <label for="date">Date de la session :</label>
-                    <input type="date" id="date" name="date" required>
+                    
+                        <label for="date">Date de la session :</label>
+                        <input type="date" id="date" name="date" required>
+
+                        <label for="heureFin">Heure d'arrivée :</label>
+                        <input type="time" id="heureFin" name="heureFin" required>
+
+                        <label for="meteo">Conditions météo :</label>
+                        <select id="meteo" name="meteo" required>
+                            <option value="" disabled="" selected="" hidden="">Choisissez la météo</option>
+                            <?php foreach ($champsMeteo as $champMeteo): ?>
+                                <option value="<?= $champMeteo["idMeteo"]?>">
+                                    <?= $champMeteo["nomMeteo"] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <label for="typeRoute">Type de route :</label>
+                        <select id="typeRoute" name="typeRoute" required>
+                            <option value="" disabled="" selected="" hidden="">Choisissez la route</option>
+                            <?php foreach ($champsRoute as $champRoute): ?>
+                                <option value="<?= $champRoute["idTypeRoute"]?>">
+                                    <?= $champRoute["typeRouteNom"] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                 </div>
+
                 <div class="droite">
                     <label for="heureDebut">Heure de départ :</label>
                     <input type="time" id="heureDebut" name="heureDebut" required>
-                </div>
-                <div class="gauche">
-                    <label for="heureFin">Heure d'arrivée :</label>
-                    <input type="time" id="heureFin" name="heureFin" required>
-                </div>
-                <div class="droite">
+
                     <label for="km">Kilométrage parcouru :</label>
                     <input type="number" id="km" name="km" placeholder="20" required min="0">
-                </div>
-                <div class="gauche">
-                    <label for="meteo">Conditions météo :</label>
-                    <select id="meteo" name="meteo" required></select>
-                </div>
-                <div class="droite">
+
                     <label for="trafic">Trafic routier :</label>
-                    <select id="trafic" name="trafic" required></select>   
-                </div>
-                <div class="gauche">
-                    <label for="environnement">Environnement de conduite :</label>
-                    <select id="environnement" name="environnement" required multiple></select>
-                </div>
-                <div class="droite">
+                    <select id="trafic" name="trafic" required>
+                        <option value="" disabled="" selected="" hidden="">Choisissez le trafic</option>
+                        <?php foreach ($champsTrafic as $champTrafic): ?>
+                            <option value="<?= $champTrafic["idTrafic"]?>">
+                                <?= $champTrafic["typeTrafic"] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
                     <label for="manoeuvre">Type de manœuvre :</label>
-                    <select id="manoeuvre" name="manoeuvre" multiple></select>
-                </div>
-                <div class="gauche">
-                    <label for="typeRoute">Type de route :</label>
-                    <select id="typeRoute" name="typeRoute" required multiple></select>
-                </div>
-                <div class="droite">
-                    <label for="transport">Événement routier :</label>
-                    <select id="transport" name="transport" multiple></select>
+                    <select id="manoeuvre" name="manoeuvre" multiple>
+                        <option value="" disabled="" selected="" hidden="">Choisissez les manoeuvres</option>
+                        <?php foreach ($champsManoeuvres as $champManoeuvre): ?>
+                            <option value="<?= $champManoeuvre["idManoeuvre"]?>">
+                                <?= $champManoeuvre["manoeuvreNom"] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <button type="submit" id="submitForm">Enregistrer</button>
             </fieldset>

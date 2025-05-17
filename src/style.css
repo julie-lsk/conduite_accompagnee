@@ -1,6 +1,5 @@
 body {
     background-image: url("images/fond.png");                 
-    color: #f0f8ff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
     min-height: 100vh; 
     margin: 0;
@@ -16,7 +15,6 @@ body {
     --highlight-color: #3ca4ff;
     --highlight-transparent-color: rgba(60, 164, 255, 0.5);
     --ok-color: #1abc9c;
-    box-sizing: border-box;
 }
 
 * {
@@ -42,6 +40,7 @@ footer {
 
 /* Style du formulaire avec adaptation pour mobile */
 form {
+    color: var(--white-color);
     display: block;           
     margin: 10vh auto;
     width: 40vw;
@@ -68,6 +67,12 @@ fieldset {
     grid-column: 4 / 6;
 }
 
+.gauche, .droite {
+    input, select {
+        margin-bottom: 1.5rem;
+    }
+}
+
 input, select {
     background-color: var(--white-color);
     width: 100%;
@@ -79,7 +84,6 @@ input, select {
 
 input:valid, select:valid{
     border:solid 3px green;
-    
 }
 
 input:invalid, select:invalid {
