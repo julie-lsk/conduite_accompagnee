@@ -3,7 +3,7 @@
 require __DIR__ . "/connectDB.php";
 
 
-// Récupération des données
+// ********** Récupération des données de la BDD **********
 
 // Expérience de conduite
 function getExpConduite() {

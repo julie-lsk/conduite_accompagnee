@@ -40,36 +40,35 @@
             <?php var_dump($champsMeteo); ?>
         </pre> -->
 
-        <form id="form">
+        <form id="form" action="form.php" method="POST">
             <fieldset>
                 <legend>Informations de la session de conduite</legend>
                 <div class="gauche">
-                    
-                        <label for="date">Date de la session :</label>
-                        <input type="date" id="date" name="date" required>
+                    <label for="date">Date de la session :</label>
+                    <input type="date" id="date" name="date" required>
 
-                        <label for="heureFin">Heure d'arrivée :</label>
-                        <input type="time" id="heureFin" name="heureFin" required>
+                    <label for="heureFin">Heure d'arrivée :</label>
+                    <input type="time" id="heureFin" name="heureFin" required>
 
-                        <label for="meteo">Conditions météo :</label>
-                        <select id="meteo" name="meteo" required>
-                            <option value="" disabled="" selected="" hidden="">Choisissez la météo</option>
-                            <?php foreach ($champsMeteo as $champMeteo): ?>
-                                <option value="<?= $champMeteo["idMeteo"]?>">
-                                    <?= $champMeteo["nomMeteo"] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                    <label for="meteo">Conditions météo :</label>
+                    <select id="meteo" name="meteo" required>
+                        <option value="" disabled="" selected="" hidden="">Choisissez la météo</option>
+                        <?php foreach ($champsMeteo as $champMeteo): ?>
+                            <option value="<?= $champMeteo["idMeteo"]?>">
+                                <?= $champMeteo["nomMeteo"] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
 
-                        <label for="typeRoute">Type de route :</label>
-                        <select id="typeRoute" name="typeRoute" required>
-                            <option value="" disabled="" selected="" hidden="">Choisissez la route</option>
-                            <?php foreach ($champsRoute as $champRoute): ?>
-                                <option value="<?= $champRoute["idTypeRoute"]?>">
-                                    <?= $champRoute["typeRouteNom"] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                    <label for="typeRoute">Type de route :</label>
+                    <select id="typeRoute" name="typeRoute" required>
+                        <option value="" disabled="" selected="" hidden="">Choisissez la route</option>
+                        <?php foreach ($champsRoute as $champRoute): ?>
+                            <option value="<?= $champRoute["idTypeRoute"]?>">
+                                <?= $champRoute["typeRouteNom"] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="droite">
@@ -89,8 +88,8 @@
                         <?php endforeach; ?>
                     </select>
 
-                    <label for="manoeuvre">Type de manœuvre :</label>
-                    <select id="manoeuvre" name="manoeuvre" multiple>
+                    <label for="manoeuvre">Types de manœuvre :</label>
+                    <select id="manoeuvre" name="manoeuvre[]" multiple>
                         <option value="" disabled="" selected="" hidden="">Choisissez les manoeuvres</option>
                         <?php foreach ($champsManoeuvres as $champManoeuvre): ?>
                             <option value="<?= $champManoeuvre["idManoeuvre"]?>">
@@ -100,6 +99,7 @@
                     </select>
                 </div>
                 <button type="submit" id="submitForm">Enregistrer</button>
+                <button type="reset">Réinitialiser</button>
             </fieldset>
         </form>
         
