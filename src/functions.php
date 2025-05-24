@@ -17,7 +17,7 @@ function nav_item(string $lien, string $titre, string $linkClass = ''):string {
 function nav_menu(string $linkClass = ''):string {
     return 
         nav_item("/index.php", "Accueil", $linkClass) .
-        nav_item("/form.php", "Enregistrer une session", $linkClass) .
+        nav_item("/formulaire.php", "Enregistrer une session", $linkClass) .
         nav_item("/recapitulatif.php", "Mes sessions", $linkClass) .
         nav_item("#", "Mon compte", $linkClass);
 }

@@ -6,38 +6,60 @@
     <title>Mes sessions de conduite accompagnée</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recapitulatif.css">
+    <link rel="icon" type="image/x-icon" href="./assets/ecf_logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <?php 
-        require __DIR__ . '/data.php'; 
+        require __DIR__ . '/data.php';
+
+        $champsExpConduite = getExpConduite();
     ?>
+
+    <!-- <pre><?php var_dump($champsExpConduite) ?></pre> -->
 
 </head>
 
 <body>
-    <header>
-        <h1>Interface conduite accompagnée</h1>
-        <div class="footer-buttons">
-            <button class="viewBilanButton">Voir le bilan</button>
-            <button class="downloadJsonButton">Télécharger JSON</button>
-            <button class="downloadCsvButton">Télécharger CSV</button>
-        </div>
-    </header>
+
+    <?php require 'components/header.php'; ?>
     
     <main>
+
+        <h2>Mes expériences de conduite</h2>
+
+        <h3>Bravo ! Tu as parcouru 
+            <strong> 
+                <?php 
+                    $somme = 0;
+                    foreach($champsExpConduite as $item):
+                        $somme += intval($item['km']);
+                    endforeach;
+                    echo $somme;
+                ?> 
+            </strong> km sur 3 000 !
+        </h3>
+
+        <table>
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th scope="col">Date de la session</th>
+                    <th scope="col">Heure de début</th>
+                    <th scope="col">Heure de fin</th>
+                    <th scope="col">Kilomètres parcourus</th>
+                    <th scope="col">Météo</th>
+                    <th scope="col">Type de route</th>
+                    <th scope="col">Type de trafic</th>
+                    <th scope="col">Manoeuvres réalisées</th>
+                </tr>
+            </thead>
+        </table>
         
     </main>
 
-    <footer>
-        <p>Réalisation : Equipe 3</p>
-        <p id="bilanDistance">Distance totale parcourue : 0 km</p>
-        <div class="footer-buttons">
-            <button class="viewBilanButton">Voir le bilan</button>
-            <button class="downloadJsonButton">Télécharger JSON</button>
-            <button class="downloadCsvButton">Télécharger CSV</button>
-        </div>
-        <p>&copy; 2024</p>
-    </footer>  
+    <?php require 'components/footer.php'; ?>
+    
 </body>
 </html>

@@ -6,12 +6,20 @@
     <title>Saisie d'une session de conduite accompagnée</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/formulaire.css">
+    <link rel="icon" type="image/x-icon" href="./assets/ecf_logo.ico">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- <script src="/index.js"></script> -->
 
     <?php 
+        // Récup des données de base du formulaire
         require __DIR__ . '/data.php'; 
+
+        $champsManoeuvres= getTypeManoeuvre(); 
+        $champsMeteo = getMeteo(); 
+        $champsRoute = getTypeRoute(); 
+        $champsTrafic = getTypeTrafic();
     ?>
 
 </head>
@@ -22,19 +30,7 @@
     
     <main>
 
-        <?php 
-            $champsExpConduite = getExpConduite(); 
-            $champsManoeuvres= getTypeManoeuvre(); 
-            $champsMeteo = getMeteo(); 
-            $champsRoute = getTypeRoute(); 
-            $champsTrafic = getTypeTrafic(); 
-        ?>
-
-        <!-- <pre>
-            <?php var_dump($champsMeteo); ?>
-        </pre> -->
-
-        <form id="form" action="recapitulatif.php" method="POST">
+        <form id="form" action="form-data.php" method="POST">
             <fieldset>
                 <legend>Informations de la session de conduite</legend>
                 <div class="gauche">
@@ -49,9 +45,7 @@
 
                     <label for="km">Kilométrage parcouru :</label>
                     <input type="number" id="km" name="km" placeholder="20" required min="0">
-                <!-- </div>
 
-                <div class="droite"> -->
                     <label for="meteo">Conditions météo :</label>
                     <select id="meteo" name="meteo" required>
                         <option value="" disabled="" selected="" hidden="">Choisissez la météo</option>

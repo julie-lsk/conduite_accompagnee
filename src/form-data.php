@@ -2,7 +2,6 @@
 
 require __DIR__ . "/connectDB.php";
 
-
 // ********** Récupération des données du formulaire **********
 $date = $_POST['date'];
 $heureDebut = $_POST['heureDebut'];
@@ -67,7 +66,11 @@ try {
         addNewsManoeuvres($pdo, $idExpConduite, $manoeuvres);
     }
 
-    echo "La nouvelle expérience de conduite a bien été enregistrée !\n";
+    // echo "La nouvelle expérience de conduite a bien été enregistrée !\n";
+
+    // Redirection vers la page de récap
+    header("Location: recapitulatif.php");
+    exit;
 
 } catch (PDOException $e) {
     echo "Il y a une erreur : " . $e->getMessage();

@@ -1,0 +1,22 @@
+main {
+    background-color: var(--white-color);
+    box-shadow: 3px 3px 15px 0 rgba(50, 50, 50, 0.05);
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    width: 95%;
+    margin: 4rem auto;
+    padding: 2rem 3rem 0 3rem;
+    
+    h2, h3 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+
+        strong {
+            color: var(--secondary-color);
+        }
+    }
+
+    table {
+        margin: 2rem 0;
+    }
+}

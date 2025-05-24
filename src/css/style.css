@@ -1,0 +1,126 @@
+/* Définitions de couleurs pour l'interface */
+:root {
+    --primary-color: #124483;
+    --white-color: #f0f8ff;
+    --secondary-color: #da1f26;
+    --background-grey: #F1F1F4;
+    --btn-primaire-hover: #1966c7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+body {
+    background-color: var(--background-grey);                 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+    min-height: 100vh; 
+    margin: 0;
+    width: 100%; 
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+    width: 100%;
+
+    .hdp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 3rem;
+        margin-bottom: 10px;
+
+        .hdp-infos {
+            display: flex;
+            align-items: center;
+
+            img {
+                margin-right: 30px;
+                max-width: 135px;
+            }
+        }
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        padding: 1rem;
+        padding-left: 3rem;
+
+        .navbar {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            a.nav-link.active {
+                border-bottom: 2px solid var(--secondary-color);
+                opacity: 1;
+            }
+
+            a.nav-link {
+                opacity: 0.65;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        img {
+            width: auto;
+            max-height: 45px;
+        }
+    }
+}
+
+footer {    
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 2em;  
+    text-align: center;      
+    font-size: 1rem;
+    width: 100%;
+
+    h4 {
+        margin-bottom: 1rem;
+    }
+
+    #inspiration {
+        margin-bottom: 1rem;
+        a {
+            color: inherit;
+        }
+    }
+}
+
+.btn-primaire {
+    background-color: var(--primary-color);
+    padding: 12px 20px;
+    color: var(--white-color);
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+        background-color: var(--btn-primaire-hover);
+    }
+}
+
+a {
+    text-decoration: none;
+}
