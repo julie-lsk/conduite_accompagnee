@@ -42,7 +42,6 @@
         </h3>
 
         <table>
-            <caption></caption>
             <thead>
                 <tr>
                     <th scope="col">Date de la session</th>
@@ -55,6 +54,37 @@
                     <th scope="col">Manoeuvres réalisées</th>
                 </tr>
             </thead>
+            <tbody>
+                <?php 
+                    // Itération sur les tableaux du tableau d'expérience de conduite
+                    $elementsToDisplay = ['dateExpConduite', 'heure_debut', 'heure_fin', 'km', 'nomMeteo', 'typeRouteNom', 'typeTrafic'];
+                    
+                    foreach($champsExpConduite as $expConduite):
+                        echo "<tr>";
+                        
+                        // On choisit les champs d'expConduite à afficher 
+                        foreach ($elementsToDisplay as $item):
+                            $value = $expConduite[$item];
+
+                            // Formatage de la date
+                            if($item == "dateExpConduite"):
+                                $date = new DateTime($value);
+                                $value = $date->format('j F o');
+                            endif;
+
+                            // Formatage de l'heure
+                            if($item == "heure_debut" || $item == "heure_fin"):
+                                $heure = new DateTime($value);
+                                $value = $heure->format('h:i');
+                            endif;
+
+                            echo "<td>" . $value . "</td>";
+                        endforeach;
+
+                        echo "</tr>";
+                    endforeach;
+                ?>
+            </tbody>
         </table>
         
     </main>

@@ -1,5 +1,7 @@
 <?php
 
+// ********** Header **********
+// Création des items
 function nav_item(string $lien, string $titre, string $linkClass = ''):string {
 
     if($_SERVER['SCRIPT_NAME'] === $lien) {
@@ -13,7 +15,7 @@ function nav_item(string $lien, string $titre, string $linkClass = ''):string {
     NAV;
 }
 
-
+// Personnalisation des items
 function nav_menu(string $linkClass = ''):string {
     return 
         nav_item("/index.php", "Accueil", $linkClass) .
