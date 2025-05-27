@@ -15,6 +15,7 @@
         require __DIR__ . '/data.php';
 
         $champsExpConduite = getExpConduite();
+        $champsManoeuvres = getManoeuvres();
     ?>
 
     <!-- <pre><?php var_dump($champsExpConduite) ?></pre> -->
@@ -27,19 +28,26 @@
     
     <main>
 
-        <h2>Mes expériences de conduite</h2>
+        <div class="recap-hdp">
+            <div class="recap-hdp-texte">
+                <h2>Mes expériences de conduite</h2>
+        
+                <h3>Bravo ! Tu as parcouru 
+                    <strong> 
+                        <?php 
+                            $somme = 0;
+                            foreach($champsExpConduite as $item):
+                                $somme += intval($item['km']);
+                            endforeach;
+                            echo $somme;
+                        ?> 
+                    </strong> km sur 3 000 !
+                </h3>
+            </div>
 
-        <h3>Bravo ! Tu as parcouru 
-            <strong> 
-                <?php 
-                    $somme = 0;
-                    foreach($champsExpConduite as $item):
-                        $somme += intval($item['km']);
-                    endforeach;
-                    echo $somme;
-                ?> 
-            </strong> km sur 3 000 !
-        </h3>
+            <button class="btn-primaire">Voir mes statistiques en graphique</button>
+            
+        </div>
 
         <table>
             <thead>
@@ -58,28 +66,43 @@
                 <?php 
                     // Itération sur les tableaux du tableau d'expérience de conduite
                     $elementsToDisplay = ['dateExpConduite', 'heure_debut', 'heure_fin', 'km', 'nomMeteo', 'typeRouteNom', 'typeTrafic'];
-                    
+
+                    // Noms des manoeuvres
+                    $manoeuvres = convertIdToStringManoeuvres();
+
                     foreach($champsExpConduite as $expConduite):
+                        $idExp = $expConduite['idExpConduite'];
+
                         echo "<tr>";
-                        
-                        // On choisit les champs d'expConduite à afficher 
-                        foreach ($elementsToDisplay as $item):
-                            $value = $expConduite[$item];
+                            
+                            // On choisit les champs d'expConduite à afficher 
+                            foreach ($elementsToDisplay as $item):
+                                $value = $expConduite[$item];
 
-                            // Formatage de la date
-                            if($item == "dateExpConduite"):
-                                $date = new DateTime($value);
-                                $value = $date->format('j F o');
-                            endif;
+                                // Formatage de la date
+                                if($item == "dateExpConduite"):
+                                    $date = new DateTime($value);
+                                    $value = $date->format('j F o');
+                                endif;
 
-                            // Formatage de l'heure
-                            if($item == "heure_debut" || $item == "heure_fin"):
-                                $heure = new DateTime($value);
-                                $value = $heure->format('h:i');
-                            endif;
+                                // Formatage de l'heure
+                                if($item == "heure_debut" || $item == "heure_fin"):
+                                    $heure = new DateTime($value);
+                                    $value = $heure->format('h:i');
+                                endif;
 
-                            echo "<td>" . $value . "</td>";
-                        endforeach;
+                                echo "<td>" . $value . "</td>";
+                            endforeach;
+
+                            // Affichage les manoeuvres en lien avec l'idExpConduite actuel
+                            echo "<td>";
+                                if(isset($manoeuvres[$idExp])):
+                                    // Transforme un tableau en une chaîne de caractères (dont les éléments sont séparés par des ,)
+                                    echo implode(' - ', $manoeuvres[$idExp]);
+                                else:
+                                    echo "Aucune manoeuvre réalisée";
+                                endif;
+                            echo "</td>";
 
                         echo "</tr>";
                     endforeach;

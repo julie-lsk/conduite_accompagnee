@@ -18,5 +18,37 @@ main {
 
     table {
         margin: 2rem 0;
+        border-collapse: collapse;
+        border: 2px solid rgb(140 140 140);
+        font-size: 0.8rem;
+        letter-spacing: 0.025rem;
+
+        thead {
+            background-color: rgb(221 221 221);
+
+            th {
+                border: 1px solid rgb(160 160 160);
+                padding: 8px 10px;
+            }
+        }
+
+        tbody tr td {
+            padding: 8px 10px;
+            border: 1px solid rgb(160 160 160);
+            text-align: center;
+        }
+
+        tbody > tr:nth-of-type(even) {
+            background-color: rgb(237 238 242);
+        }
+    }
+
+    .recap-hdp {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            height: fit-content;
+        }
     }
 }
