@@ -34,6 +34,26 @@ header {
         padding: 1rem 3rem;
         margin-bottom: 10px;
 
+        @media (max-width: 768px) {
+            padding: 1rem;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 530px) {
+            flex-direction: column;
+            gap: 1rem;
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn-primaire {
+                display: none;
+            }
+        }
+
         .hdp-infos {
             display: flex;
             align-items: center;
@@ -54,11 +74,25 @@ header {
         padding: 1rem;
         padding-left: 3rem;
 
+        @media (max-width: 700px) {
+            flex-direction: column;
+            gap: 1rem;
+            padding-left: 1rem;
+            text-align: center;
+        }
+
         .navbar {
             list-style: none;
             display: flex;
             align-items: center;
             gap: 3rem;
+            
+            @media (max-width: 450px) {
+                column-gap: 3rem;
+                flex-wrap: wrap;
+                row-gap: 1rem;
+                justify-content: center;
+            }
 
             a {
                 color: inherit;
@@ -82,6 +116,10 @@ header {
         img {
             width: auto;
             max-height: 45px;
+
+            @media (max-width: 576px) {
+                display: none;
+            }
         }
     }
 }
@@ -115,6 +153,7 @@ footer {
     font-size: 1rem;
     cursor: pointer;
     border: none;
+    text-align: center;
 
     &:hover {
         background-color: var(--btn-primaire-hover);

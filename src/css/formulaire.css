@@ -3,10 +3,21 @@ form {
     display: block;           
     margin: 7vh auto;
     width: 45vw;
-    min-width: 300px;   
     padding: 1em;
     background-color: var(--primary-color);
-    border-radius: 15px;            
+    border-radius: 15px;
+    
+    @media (max-width: 1248px) {
+        width: 60%;
+    }
+
+    @media (max-width: 900px) {
+        width: 75%;
+    }
+
+    @media (max-width: 730px) {
+        width: 90%;
+    }
 }
 
 fieldset {
@@ -53,6 +64,10 @@ select[multiple]{
     display: grid;
     column-gap: 30px;
     grid-template-columns: 1fr 1fr;
+
+    @media (max-width: 730px) {
+        grid-template-columns: 1fr;
+    }
 
     .form-manoeuvre {
         display: flex;

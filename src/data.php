@@ -163,6 +163,6 @@ function convertIdToStringManoeuvres() {
             $manoeuvresParExpConduite[$idExp][] = $manoeuvresNoms[$id] ?? 'Manoeuvre inconnue';
         endforeach;
     endforeach;
-    
+
     return $manoeuvresParExpConduite;
 }

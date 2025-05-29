@@ -91,59 +91,6 @@
                 <button type="reset" id="resetForm">Réinitialiser</button>
             </fieldset>
         </form>
-
-        <!-- Page de bilan -->
-        <div id="bilanPage" style="display:none">
-            <h2>Bilan des Expériences de Conduite</h2>
-            <div>
-                <label for="filterDate">Filtrer par date :</label>
-                <input type="date" id="filterDate">
-                
-                <label for="filterCondition">Filtrer par condition météo :</label>
-                <select id="filterCondition">
-                    <option value="">-- Toutes --</option>
-                    <option value="1">Ensoleillée</option>
-                    <option value="2">Pluie</option>
-                    <option value="3">Brouillard</option>
-                    <option value="4">Neige</option>
-                    <option value="5">Vent</option>
-                    <option value="6">Orage</option>
-                    <option value="7">Nuageux</option>
-                    <option value="8">Canicule</option>
-                    <option value="9">Grêle</option>
-                    <option value="10">Averses</option>
-                    <option value="11">Tempête</option>
-                    <option value="12">Gel</option>
-                </select>
-                
-                <button id="applyFiltersButton">Appliquer les filtres</button>
-            </div>
-            <div id="statistics">
-                <p id="totalExperiences">Nombre total d'expériences : 0</p>
-                <p id="totalKilometers">Nombre total de kilomètres parcourus : 0 km</p>
-                <p id="averageKilometers">Moyenne des kilomètres parcourus : 0 km</p>
-                <table class="stat-table">
-                    <tr><th>Condition Météo</th><th>Nombre d'expériences</th></tr>
-                    <tbody id="experiencesByCondition"></tbody>
-                </table>
-                <table class="stat-table">
-                    <tr><th>Type de Route</th><th>Nombre d'expériences</th></tr>
-                    <tbody id="experiencesByRouteType"></tbody>
-                </table>
-                <table class="stat-table">
-                    <tr><th>Type de Manœuvre</th><th>Nombre d'expériences</th></tr>
-                    <tbody id="experiencesByManoeuvre"></tbody>
-                </table>
-                <table class="stat-table">
-                    <tr><th>Type de transport</th><th>Nombre d'expériences</th></tr>
-                    <tbody id="experiencesByTransport"></tbody>
-                </table>
-            </div>
-            <div id="statisticsByExperience">
-
-            </div>
-        </div>
-        
     </main>
 
     <?php require 'components/footer.php'; ?>                        

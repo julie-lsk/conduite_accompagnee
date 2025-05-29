@@ -23,3 +23,33 @@ function nav_menu(string $linkClass = ''):string {
         nav_item("/recapitulatif.php", "Mes sessions", $linkClass) .
         nav_item("#", "Mon compte", $linkClass);
 }
+
+// ********** Choix des variables d'un ExpConduite à afficher **********
+function champsExpConduite(array $expConduite, array $elementsToDisplay, bool $affichageTableau = true):array {
+    $valeursFormatees = [];
+    
+    // On choisit les champs d'expConduite à afficher 
+    foreach ($elementsToDisplay as $item):
+        $value = $expConduite[$item];
+
+        // Formatage de la date
+        if($item == "dateExpConduite"):
+            $date = new DateTime($value);
+            $value = $date->format('j F o');
+        endif;
+
+        // Formatage de l'heure
+        if($item == "heure_debut" || $item == "heure_fin"):
+            $heure = new DateTime($value);
+            $value = $heure->format('h:i');
+        endif;
+
+        if ($affichageTableau):
+            echo "<td>" . $value . "</td>";
+        else:
+            $valeursFormatees[] = $value;
+        endif;
+    endforeach;
+
+    return $valeursFormatees;
+}
