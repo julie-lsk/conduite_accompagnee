@@ -3,7 +3,7 @@
 <header>
     <section class="hdp">
         <div class="hdp-infos">
-            <a href="index.php">
+            <a href="/sp-conduite-accompagnee/src">
                 <img src="assets/ecf_logo.png" alt="Logo de l'auto-école ECF Obernai">
             </a>
             <div class="hdp-nom">
@@ -11,7 +11,7 @@
                 <p>Groupe LLERENA</p>
             </div>
         </div>
-        <a class="btn-primaire" href="/formulaire.php">Enregistrer une session</a>
+        <a class="btn-primaire" href="/sp-conduite-accompagnee/src/formulaire.php">Enregistrer une session</a>
     </section>
     <nav>
         <ul class="navbar">

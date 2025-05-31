@@ -18,9 +18,9 @@ function nav_item(string $lien, string $titre, string $linkClass = ''):string {
 // Personnalisation des items
 function nav_menu(string $linkClass = ''):string {
     return 
-        nav_item("/index.php", "Accueil", $linkClass) .
-        nav_item("/formulaire.php", "Enregistrer une session", $linkClass) .
-        nav_item("/recapitulatif.php", "Mes sessions", $linkClass) .
+        nav_item("/sp-conduite-accompagnee/src/index.php", "Accueil", $linkClass) .
+        nav_item("/sp-conduite-accompagnee/src/formulaire.php", "Enregistrer une session", $linkClass) .
+        nav_item("/sp-conduite-accompagnee/src/recapitulatif.php", "Mes sessions", $linkClass) .
         nav_item("#", "Mon compte", $linkClass);
 }
 
